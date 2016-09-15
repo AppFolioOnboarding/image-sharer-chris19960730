@@ -42,10 +42,17 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+<<<<<<< HEAD
     acts-as-taggable-on (6.5.0)
       activerecord (>= 5.0, < 6.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+=======
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
+    ae_page_objects (4.1.0)
+      capybara (~> 3.0)
+>>>>>>> f8d3053... Add ae_page_objects
     arel (9.0.0)
     ast (2.4.0)
     bindex (0.7.0)
@@ -235,6 +242,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on (~> 6.0)
+  ae_page_objects
   byebug
   capybara
   jquery-rails
