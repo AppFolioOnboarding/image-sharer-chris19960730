@@ -1,0 +1,39 @@
+<h1 class="text-center mt-4">Save an Image</h1>
+
+<div class="row justify-content-center mt-5">
+    <div class="col-10">
+        <%= form_with model: @image, local:true do |f|%>
+            <div class="form-group row">
+                <%= f.label :name, class:"col-2"%>
+                <div class="col-8">
+                    <%= f.text_field :name, class:"form-control shadow rounded"%>
+                </div>
+                <% if @image.errors[:name].present? %>
+                    <div class="col-2 font-italic text-danger">
+                    <strong>Error: </strong><%= @image.errors[:name][0] %>
+                    </div>
+                <% end %>
+            </div>
+
+            <div class="form-group row">
+                <%= f.label :url, class: "col-2" %>
+                <div class="col-8">
+                    <%= f.url_field :url, class: "form-control shadow rounded" %>
+                   
+                    <small  class="form-text text-muted">This should be the image full url, typically include the image filename</small>
+                </div>
+                 <% if @image.errors[:url].present? %>
+                <div class="col-2 font-italic text-danger">
+                <strong>Error: </strong><%= @image.errors[:url][0] %>
+                </div>
+                <% end %>
+            </div>
+            <div class="form-group row justify-content-center">
+                <%= f.submit "Save", class: "btn btn-outline-success btn-lg shadow rounded" %>
+            </div>
+           
+
+            
+        <%end%>
+    </div>
+</div>
