@@ -18,7 +18,7 @@ class ImagesController < ApplicationController
       redirect_to @image
     else
       flash[:alert] = 'Error found!'
-      render 'new'
+      render :new, status: :unprocessable_entity
     end
   end
 

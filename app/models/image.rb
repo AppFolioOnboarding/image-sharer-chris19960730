@@ -12,8 +12,7 @@ class Image < ApplicationRecord
     Net::HTTP.start(url.host, url.port) do |http|
       return http.head(url.request_uri)['Content-Type'].start_with? 'image'
     end
-  rescue StandardError => e
-    print e.message
+  rescue StandardError
     nil
   end
 
@@ -25,8 +24,7 @@ class Image < ApplicationRecord
     http.start do |https|
       return https.head(url.request_uri)['Content-Type'].start_with? 'image'
     end
-  rescue StandardError => e
-    print e.message
+  rescue StandardError
     nil
   end
 
