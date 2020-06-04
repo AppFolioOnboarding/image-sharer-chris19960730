@@ -38,4 +38,21 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_select 'h1', text: 'Image detail'
     assert_select 'h5', text: 'test'
   end
+
+  test 'should get index' do
+    Image.delete_all
+    image_url_list = [
+      'https://images.unsplash.com/photo-1588739309531-ae0773a4967a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+      'https://images.unsplash.com/photo-1544568100-847a948585b9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+      'https://images.unsplash.com/photo-1501879779179-4576bae71d8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+      'https://images.unsplash.com/photo-1501879779179-4576bae71d8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+      'https://images.unsplash.com/photo-1496497243327-9dccd845c35f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
+    ]
+    image_url_list.each_with_index do |url, index|
+      Image.create(name: "Image#{index}", url: url)
+    end
+    get root_path
+    assert_select 'h1.title', text: 'Image Gallery'
+    assert_select 'div.card', 5
+  end
 end
