@@ -55,4 +55,12 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_select 'h1.title', text: 'Image Gallery'
     assert_select 'div.card', 5
   end
+
+  test 'should get tag element' do
+    image = Image.new(name: 'test', url: 'https://images.unsplash.com/photo-1591192617272-64be39d91882?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60')
+    image.tag_list = 'test'
+    image.save!
+    get image_path(image)
+    assert_select 'span.badge', text: 'test'
+  end
 end
