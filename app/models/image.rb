@@ -1,4 +1,5 @@
 class Image < ApplicationRecord
+  acts_as_taggable_on :tags
   # Validation for image columns.
   validates :name, presence: true
   validates :url, presence: true
