@@ -6,15 +6,7 @@
     </div>
     <%= image_tag(@image.url, class:"card-img")%>
     <div class="card-footer text-muted">
-        <% if @image.tags.any? %>
-            <div class="mb-2">Tags: 
-                <%@image.tag_list.each do |tag| %>
-                    <span class="badge badge-success mr-1">
-                        <%= tag %>
-                    </span>
-                <%end%>
-            </div>
-        <% end %>
+         <%= render 'images/tag_badge',image: @image%>  
         <small>Created <%= time_ago_in_words(@image.created_at) %></small> 
     </div>
 </div>

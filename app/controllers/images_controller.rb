@@ -8,7 +8,13 @@ class ImagesController < ApplicationController
   end
 
   def index
-    @images = Image.order(created_at: :desc)
+    @tag = tag_params[:tag]
+    if @tag
+      @images = Image.tagged_with([@tag], any: true).order(created_at: :desc)
+      process_filtered_image
+    else
+      @images = Image.order(created_at: :desc)
+    end
   end
 
   def create
@@ -26,5 +32,18 @@ class ImagesController < ApplicationController
 
   def image_params
     params.require(:image).permit(:name, :url, :tag_list)
+  end
+
+  def process_filtered_image
+    if @images.any?
+      flash[:notice] = "Now only showing images with #{@tag} tag"
+    else
+      flash[:alert] = 'There is no such tag in our system'
+      redirect_to images_path, status: :not_found
+    end
+  end
+
+  def tag_params
+    params.permit(:tag)
   end
 end

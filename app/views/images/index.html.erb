@@ -1,4 +1,9 @@
+<% if @tag%>
+<h1 class="title text-center mt-4">Images of <strong><%=@tag%></strong></h1>
+<%else%>
 <h1 class="title text-center mt-4"> Image Gallery</h1>
+<%end%>
+
 
 <div class="jumbotron mt-5">
     <h1 class="display-3">Image Sharer</h1>
@@ -15,13 +20,14 @@
     <% @images.each do |image| %>
         <div class="col-12 col-md-6 col-lg-4 mb-4">
             <div class="card" >
-                <%= image_tag image.url, class: "card-img-top image-size" %>
+                <%= image_tag image.url, skip_pipeline: true, class: "card-img-top image-size" %>
                 <div class="card-body">
                     <p class="card-text">
                         <%= image.name %>
                     </p>                    
                 </div>
                 <div class="card-footer text-muted">
+                    <%= render 'images/tag_badge',image: image%>                    
                     <small>
                         Created <%= time_ago_in_words(image.created_at) %>
                     </small>            

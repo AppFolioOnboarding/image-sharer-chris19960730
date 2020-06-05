@@ -1,0 +1,9 @@
+<% if image.tags.any? %>
+    <div class="mb-2">Tags: 
+        <%image.tag_list.each do |tag| %>
+            <span class="badge badge-success mr-1">
+                <%= link_to tag, images_path(tag:tag),class: "text-dark"%>
+            </span>
+        <%end%>
+    </div>
+<% end %>
