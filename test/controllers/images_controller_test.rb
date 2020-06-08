@@ -40,7 +40,6 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get index' do
-    Image.delete_all
     image_url_list = [
       'https://images.unsplash.com/photo-1588739309531-ae0773a4967a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
       'https://images.unsplash.com/photo-1544568100-847a948585b9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
@@ -53,7 +52,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     end
     get root_path
     assert_select 'h1.title', text: 'Image Gallery'
-    assert_select 'div.card', 5
+    assert_select 'p.card-text', 5
   end
 
   test 'should get tag element' do
@@ -62,5 +61,23 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     image.save!
     get image_path(image)
     assert_select 'span.badge', text: 'test'
+  end
+
+  test 'filter__success' do
+    image = Image.new(name: 'test', url: 'https://images.unsplash.com/photo-1591192617272-64be39d91882?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60')
+    image.tag_list = 'test'
+    image.save!
+    get images_path(tag: image.tag_list[0])
+    assert_response :success
+    assert_select 'h1.title', text: 'Images of test'
+  end
+
+  test 'filter__failure' do
+    image = Image.new(name: 'test', url: 'https://images.unsplash.com/photo-1591192617272-64be39d91882?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60')
+    image.tag_list = 'test'
+    image.save!
+    get images_path(tag: 'new_tag')
+    assert_response 404
+    assert_select 'body', text: 'You are being redirected.'
   end
 end

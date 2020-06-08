@@ -1,3 +1,4 @@
+require: rubocop-rails
 AllCops:
   Exclude:
     - 'db/schema.rb'
@@ -8,16 +9,16 @@ AllCops:
     - 'bin/*'
   TargetRubyVersion: 2.5
 
-Layout/IndentFirstArrayElement:
+Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
 
-Layout/IndentFirstHashElement:
+Layout/FirstHashElementIndentation:
   EnforcedStyle: consistent
 
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 112  # Maximum line length from `rails new`
 
 Rails:
