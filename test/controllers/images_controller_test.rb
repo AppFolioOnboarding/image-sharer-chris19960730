@@ -80,4 +80,14 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_response 404
     assert_select 'body', text: 'You are being redirected.'
   end
+
+  test 'should delete image' do
+    image = Image.new(name: 'test', url: 'https://images.unsplash.com/photo-1591192617272-64be39d91882?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60')
+    image.tag_list = 'test'
+    image.save!
+    assert_difference('Image.count', -1) do
+      delete image_path(image)
+    end
+    assert_redirected_to images_path
+  end
 end
