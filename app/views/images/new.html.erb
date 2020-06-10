@@ -6,7 +6,7 @@
             <div class="form-group row">
                 <%= f.label :name, class:"col-2"%>
                 <div class="col-8">
-                    <%= f.text_field :name, class:"form-control shadow rounded"%>
+                    <%= f.text_field :name,class:"form-control shadow rounded name"%>
                 </div>
                 <% if @image.errors[:name].present? %>
                     <div class="col-2 font-italic text-danger">
@@ -18,12 +18,12 @@
             <div class="form-group row">
                 <%= f.label :url, class: "col-2" %>
                 <div class="col-8">
-                    <%= f.url_field :url, class: "form-control shadow rounded" %>
+                    <%= f.url_field :url, class: "form-control shadow rounded url" %>
                    
                     <small  class="form-text text-muted">This should be the image full url, typically include the image filename</small>
                 </div>
                 <% if @image.errors[:url].present? %>
-                <div class="col-2 font-italic text-danger">
+                <div class="col-2 font-italic text-danger url_error">
                 <strong>Error: </strong><%= @image.errors[:url][0] %>
                 </div>
                 <% end %>
@@ -31,7 +31,7 @@
             <div class="form-group row">
                 <%= f.label :tag_list, class: "col-2" %>
                 <div class="col-8">
-                    <%= f.text_field :tag_list, class: "form-control shadow rounded", placeholder: "Simply type tags split by comma" %>
+                    <%= f.text_field :tag_list, class: "form-control shadow rounded  tag_list", placeholder: "Simply type tags split by comma" %>
                 </div>
             </div>
 

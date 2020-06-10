@@ -6,6 +6,8 @@
     </div>
     <%= image_tag(@image.url, class:"card-img")%>
     <div class="card-footer text-muted">
+        <%= link_to 'Delete', image_path(@image), method: :delete, data:{confirm: "Are you sure you wanna delete this image?"}, class: 'btn btn-outline-danger image-delete'%>    
+        <%= link_to 'Back', images_path,class:'btn btn-outline-info js-back'%>
          <%= render 'images/tag_badge',image: @image%>  
         <small>Created <%= time_ago_in_words(@image.created_at) %></small> 
     </div>
