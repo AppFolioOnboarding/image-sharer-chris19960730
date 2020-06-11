@@ -13,10 +13,11 @@
     <hr class="my-2">
     <p class="lead">
         <%= link_to "Save an image", new_image_path, class: "btn btn-primary btn-lg" %>
+         <%= link_to "remove filter", images_path, class: "btn btn-primary btn-lg remove-filter" %>
     </p>
 </div>
 
-<div class="row">
+<div class="row image-container">
     <% @images.each do |image| %>
         <div class="col-12 col-md-6 col-lg-4 mb-4">
             <div class="card" >
@@ -24,7 +25,9 @@
                 <div class="card-body">
                     <p class="card-text">
                         <%= image.name %>
-                    </p>                    
+                    </p>    
+                     <%= link_to 'View', image_path(image),class: 'btn btn-outline-success image-view'%>    
+                    <%= link_to 'Delete', image_path(image), method: :delete, data:{confirm: "Are you sure you wanna delete this image?"}, class: 'btn btn-outline-danger'%>    
                 </div>
                 <div class="card-footer text-muted">
                     <%= render 'images/tag_badge',image: image%>                    
